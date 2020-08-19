@@ -19,7 +19,7 @@ public class Booking {
         Rider rider = rider_map.get(rider_id);
         Location source = new Location(source_x, source_y);
         Location destination = new Location(destination_x, destination_y);
-        Driver driver = getDriver(source);
+        Driver driver = getCab(source);
         if(driver == null){
             System.out.println("No Cab Found.");
             return;
@@ -38,7 +38,7 @@ public class Booking {
 
     }
 
-    private Driver getDriver(Location location){
+    private Driver getCab(Location location){
         HashMap<Long, Driver> drivers = this.registered.getDrivers();
         for (Driver driver: drivers.values()){
             Location driver_location = driver.getLocation();
@@ -49,7 +49,8 @@ public class Booking {
             int sq_x = (int) Math.pow(x-d_x, 2);
             int sq_y = (int) Math.pow(y-d_y, 2);
             double distance = Math.sqrt(sq_x+sq_y);
-            if(distance<=10){
+            if(distance<=10 && driver.isAvailable()){
+                driver.setAvailable(false);
                 return driver;
             }
         }

@@ -1,5 +1,7 @@
 package com.company.CabBooking.models;
 
+import java.time.LocalDateTime;
+
 public class Ride {
     private Rider rider;
     private Driver driver;
@@ -7,6 +9,7 @@ public class Ride {
     private Location source;
     private Location destination;
     private long total_distance;
+    private LocalDateTime rideOn;
 
     public Ride(Rider rider, Driver driver, Cab cab, Location source, Location destination) {
         this.rider = rider;
@@ -14,6 +17,7 @@ public class Ride {
         this.cab = cab;
         this.source = source;
         this.destination = destination;
+        this.rideOn = LocalDateTime.now();
     }
 
     public Driver getDriver() {
@@ -50,5 +54,9 @@ public class Ride {
 
     public Rider getRider() {
         return rider;
+    }
+
+    public LocalDateTime getRideOn() {
+        return rideOn;
     }
 }
